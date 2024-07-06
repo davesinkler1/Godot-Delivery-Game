@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbo0ob4qfvj47"]
+
+[ext_resource type="Script" path="res://dialogue/dialogue.gd" id="1_gleyx"]
+[ext_resource type="Texture2D" uid="uid://dml6wkods3xbq" path="res://dialogue_box.png" id="1_iuag8"]
+
+[node name="Dialogue" type="CanvasLayer"]
+script = ExtResource("1_gleyx")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -154.0
+offset_top = -66.0
+offset_right = 59.0
+offset_bottom = 34.0
+texture = ExtResource("1_iuag8")
+region_rect = Rect2(0.594635, 0.595228, 30.9449, 30.6746)
+
+[node name="Chat" type="RichTextLabel" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 19.0
+offset_right = 274.0
+offset_bottom = 244.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "Thinking..."
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

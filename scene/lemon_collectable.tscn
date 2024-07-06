@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://75gfvdjcmrn8"]
+
+[ext_resource type="Texture2D" uid="uid://cxrbv6pd2tv6f" path="res://assets/bag_coins.png" id="1_ps1hd"]
+
+[node name="lemon_collectable" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ps1hd")

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://guq2s2drdpyf"]
+
+[ext_resource type="Script" path="res://scene/npc.gd" id="1_s23o2"]
+[ext_resource type="Texture2D" uid="uid://bycpcrsvfxyxa" path="res://goblin_idle_anim_f0.png" id="1_tnr4s"]
+[ext_resource type="Script" path="res://scene/interaction_area.gd" id="3_aswt6"]
+[ext_resource type="AudioStream" uid="uid://dxgxjkslyk075" path="res://sfx/mixkit-money-bag-drop-1989.wav" id="4_1cffu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np57p"]
+size = Vector2(52.25, 43.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_85qag"]
+radius = 70.0071
+
+[node name="NPC" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_s23o2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.00006, 1.00006)
+scale = Vector2(5, 5)
+texture = ExtResource("1_tnr4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 9)
+shape = SubResource("RectangleShape2D_np57p")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="chat_detection_area" type="Area2D" parent="."]
+collision_layer = 3
+script = ExtResource("3_aswt6")
+interact_label = "E"
+interact_type = "print_text"
+interact_value = ""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_detection_area"]
+position = Vector2(8, -5)
+shape = SubResource("CircleShape2D_85qag")
+
+[node name="DropOff" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1cffu")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="chat_detection_area" to="." method="_on_chat_detection_area_body_entered"]
+[connection signal="body_exited" from="chat_detection_area" to="." method="_on_chat_detection_area_body_exited"]
